@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Keep bots away from non-existent backend paths
+Disallow: /admin/
+Disallow: /tmp/
+Disallow: /*.log$
+
+# Sitemap location
+Sitemap: https://www.fitnessrepairksa.com/sitemap.xml
