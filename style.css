@@ -240,17 +240,40 @@ ul {
     display: flex;
     align-items: center;
     gap: 12px;
+    transition: var(--transition);
     letter-spacing: -0.03em;
 }
 
-.logo img {
-    height: 44px;
+.logo-img {
+    height: 70px;
     width: auto;
     object-fit: contain;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
-.navbar.scrolled .logo img {
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+.logo-line-1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: inherit;
+    margin-bottom: 2px;
+}
+
+.logo-line-2 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: inherit;
+    opacity: 0.9;
+}
+
+.navbar.scrolled .logo-img {
     filter: brightness(0.2);
     /* Make logo darker on light background if it's currently white */
 }
@@ -1128,6 +1151,23 @@ ul {
         font-size: 3.2rem;
     }
 
+    /* Tablet logo adjustments */
+    .logo {
+        gap: 10px;
+    }
+
+    .logo-img {
+        height: 65px;
+    }
+
+    .logo-line-1 {
+        font-size: 1rem;
+    }
+
+    .logo-line-2 {
+        font-size: 0.8rem;
+    }
+
     .maintenance-grid,
     .contact-grid,
     .about-flex {
@@ -1182,18 +1222,29 @@ ul {
     .navbar.scrolled .logo,
     header .logo {
         color: #1F2A33 !important;
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;
+        gap: 8px !important;
     }
 
-    .navbar .logo img,
-    .navbar.scrolled .logo img,
-    header .logo img {
-        height: 32px !important;
+    .navbar .logo-img,
+    .navbar.scrolled .logo-img,
+    header .logo-img {
+        height: 48px !important;
         width: auto !important;
         flex-shrink: 0 !important;
         /* Logo is white PNG — invert it to black so it's visible on white navbar */
         filter: brightness(0) saturate(100%) !important;
-        opacity: 1 !important;
+    }
+
+    .logo-line-1 {
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+    }
+
+    .logo-line-2 {
+        font-size: 0.75rem !important;
+        font-weight: 500 !important;
+        opacity: 0.85 !important;
     }
 
     /* Hamburger toggle */
