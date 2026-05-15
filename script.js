@@ -105,4 +105,56 @@ document.addEventListener('DOMContentLoaded', () => {
     animateElements.forEach(el => {
         observer.observe(el);
     });
+
+    // 7. Language Switcher Logic
+    const langSwitcher = document.getElementById('lang-switcher');
+    const langText = document.getElementById('lang-text');
+    let currentLang = 'ar';
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+        // Update Button Text
+        if (langText) {
+            langText.textContent = lang === 'ar' ? 'English' : 'العربية';
+        }
+
+        // Update SEO tags
+        const t = translations[lang];
+        if (t) {
+            document.title = t.metaTitle;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.content = t.metaDescription;
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) ogTitle.content = t.metaTitle;
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.content = t.metaDescription;
+            const twTitle = document.querySelector('meta[name="twitter:title"]');
+            if (twTitle) twTitle.content = t.metaTitle;
+            const twDesc = document.querySelector('meta[name="twitter:description"]');
+            if (twDesc) twDesc.content = t.metaDescription;
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = t[key];
+                    } else {
+                        el.innerHTML = t[key];
+                    }
+                }
+            });
+            
+        }
+    }
+
+    if (langSwitcher) {
+        langSwitcher.addEventListener('click', () => {
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            setLanguage(newLang);
+        });
+    }
 });
